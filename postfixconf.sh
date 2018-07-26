@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
 
+## From https://github.com/munkee/postfixconf
+## Originally from https://github.com/roubles/postfixconf
+
 MAIN_CF=/etc/postfix/main.cf
 SASL_PASSWD=/etc/postfix/sasl_passwd
 HOSTNAME_PORT=
@@ -138,9 +141,12 @@ spin 10
 
 echo "You are done. Check $USERNAME's email."
 
-echo -n "Do you want to tail /var/log/mail.log [y|n]:"
-read input
-if [[ "$input" == "y" ]]; then
-    echo "Tailing /var/log/mail.log (ctrl-c to quit)"
-    tail -f /var/log/mail.log
-fi
+## FIXME
+## /var/log/mail.log no longer exists as of Sierra (possibly earlier)
+## https://apple.stackexchange.com/questions/276322/where-is-the-postfix-log-on-sierra
+#echo -n "Do you want to tail /var/log/mail.log [y|n]:"
+#read input
+#if [[ "$input" == "y" ]]; then
+#    echo "Tailing /var/log/mail.log (ctrl-c to quit)"
+#    tail -f /var/log/mail.log
+#fi
