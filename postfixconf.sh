@@ -21,8 +21,11 @@ function updateLineContaining() {
     echo "$2" >> $3
 }
 
-echo -n "Type the SMTP hostname and port (example: smtp.gmail.com:587): "
+echo -n "Type the SMTP hostname and port (default: smtp.gmail.com:587): "
 read HOSTNAME_PORT
+if [[ -z "$HOSTNAME_PORT" ]]; then
+  HOSTNAME_PORT="smtp.gmail.com:587"
+fi
 HOSTNAME_PORT="${HOSTNAME_PORT//[[:space:]]/}"
 HOSTNAME=$(echo $HOSTNAME_PORT | cut -d":" -f1)
 
