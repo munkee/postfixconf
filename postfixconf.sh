@@ -72,7 +72,7 @@ echo "Working..."
 function configure_smtp() {
     echo "Updating $MAIN_CF"
     updateLineContaining "#postfixconf relayhost"            "#postfixconf relayhost $HOSTNAME_PORT"           $MAIN_CF
-    updateLineContaining "relayhost[ ]*=[ ]*$HOSTNAME"       "relayhost = $HOSTNAME_PORT"                      $MAIN_CF
+    updateLineContaining "relayhost[ ]*=\([ ]*$HOSTNAME\)*"  "relayhost = $HOSTNAME_PORT"                      $MAIN_CF
     updateLineContaining "smtp_sasl_auth_enable"             "smtp_sasl_auth_enable = yes"                     $MAIN_CF
     updateLineContaining "smtp_sasl_password_maps"           "smtp_sasl_password_maps = hash:$SASL_PASSWD"     $MAIN_CF
     updateLineContaining "smtp_sasl_security_options"        "smtp_sasl_security_options = noanonymous"        $MAIN_CF
