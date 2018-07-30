@@ -144,12 +144,14 @@ spin 10
 
 echo "You are done. Check $USERNAME's email."
 
-## FIXME
-## /var/log/mail.log no longer exists as of Sierra (possibly earlier)
+
 ## https://apple.stackexchange.com/questions/276322/where-is-the-postfix-log-on-sierra
-#echo -n "Do you want to tail /var/log/mail.log [y|n]:"
-#read input
-#if [[ "$input" == "y" ]]; then
-#    echo "Tailing /var/log/mail.log (ctrl-c to quit)"
-#    tail -f /var/log/mail.log
-#fi
+echo -n "Do you want to see the last 30 minutes of email logs [y|n]:"
+read input
+if [[ "$input" == "y" ]]; then
+  cat <<'EOF'
+Executing `log show --last 30m --predicate  '(process == "smtpd") || (process == "smtp")' --info`
+(ctrl-c to quit)
+EOF
+  log show --last 30m --predicate  '(process == "smtpd") || (process == "smtp")' --info
+fi
